@@ -39,6 +39,6 @@ ENTRYPOINT ["./main"]
 
 
 # docker create network api_network
-# docker build -f Dockerfile -t abacateiro .
-# docker run -p 8080:8080 abacateiro
-# docker run -d -p 8080:8080 --network api_network --name abacateiro abacateiro
+# docker build -f Dockerfile -t bem-te-vi .
+# docker run -p 8080:8080 bem-te-vi
+# docker run -d -p 8080:8080 --network api_network --name bem-te-vi bem-te-vi

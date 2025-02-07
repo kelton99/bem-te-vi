@@ -1,8 +1,8 @@
 #!/bin/sh
 
-user="abacateiro"
-pass="abacateiro"
-db="abacateiro"
+user="bem-te-vi"
+pass="bemtevi"
+db="bem-te-vi"
 host="localhost"
 port="5432"
 

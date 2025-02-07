@@ -1,4 +1,4 @@
-# Quasar App (frontend-abacateiro)
+# Quasar App (frontend-bem-te-vi)
 
 A Quasar Project
 

@@ -4,7 +4,7 @@ services:
   backend:
     container_name: backend
     build: 
-      context: abacateiro
+      context: bem-te-vi
       dockerfile: Dockerfile
     ports:
       - "8080:8080"      
@@ -25,17 +25,17 @@ services:
       - api_network
     volumes:
       - ./postgres/.docker/postgres_data:/var/lib/postgresql/data
-      - ./abacateiro/migrations:/docker-entrypoint-initdb.d/migrations
+      - ./bem-te-vi/migrations:/docker-entrypoint-initdb.d/migrations
     environment:
-      POSTGRES_USER: abacateiro
-      POSTGRES_PASSWORD: abacateiro
-      POSTGRES_DB: abacateiro
+      POSTGRES_USER: bem-te-vi
+      POSTGRES_PASSWORD: bemtevi
+      POSTGRES_DB: bem-te-vi
 
    # front-end built with quasar 
   frontend:
     container_name: frontend
     build:
-      context: ./frontend-abacateiro
+      context: ./frontend-bem-te-vi
       dockerfile: Dockerfile
     ports:
       - "9000:9000"
@@ -46,7 +46,7 @@ services:
     restart: always
     scale: 1
     volumes:
-      - ./frontend-abacateiro:/app 
+      - ./frontend-bem-te-vi:/app 
 
 networks:
   api_network:
