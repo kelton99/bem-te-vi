@@ -1,4 +1,4 @@
-package application
+package domain
 
 import (
 	"fmt"
@@ -10,8 +10,8 @@ const (
 )
 
 type Token struct {
-	Token     string    `json:"token"`
-	Expiry    time.Time `json:"expiry"`	
+	Token  string    `json:"token"`
+	Expiry time.Time `json:"expiry"`
 }
 
 func (t *Token) Validate() error {
@@ -25,9 +25,4 @@ func (t *Token) Validate() error {
 		return fmt.Errorf("expiry is required")
 	}
 	return nil
-}
-
-type TokenService interface {
-	GenerateToken(AuthInfo *AuthInfo) (*Token, error)
-	ValidateToken(token string) (error)
 }

@@ -37,6 +37,17 @@ func (ur *UserRepository) FindById(id int) (domain.User, error) {
 	return user, err
 }
 
+func (ur *UserRepository) FindByEmail(username string) (domain.User, error) {
+
+	var user domain.User
+
+	query := `SELECT id, name, email, password FROM users WHERE email = $1`
+
+	err := ur.db.QueryRow(context.Background(), query, username).Scan(&user.ID, &user.Name, &user.Email)
+
+	return user, err
+}
+
 func (ur *UserRepository) FindAll() (pgx.Rows, error) {
 	query := `SELECT id, name, email, document FROM users`
 

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"application"
+	"application/domain"
 	"application/interfaces"
 	"context"
 	"fmt"
@@ -32,7 +32,7 @@ func NewAuthService(userService interfaces.UserService) *AuthService {
 	}
 }
 
-func (s *AuthService) Login(ctx context.Context, query *application.LoginUserQuery) (*application.AuthInfo, error) {
+func (s *AuthService) Login(ctx context.Context, query *domain.LoginUserQuery) (*domain.AuthInfo, error) {
 
 	user, err := s.userService.GetUserByEmail(query.Username)
 
@@ -44,7 +44,7 @@ func (s *AuthService) Login(ctx context.Context, query *application.LoginUserQue
 		return nil, fmt.Errorf("invalid password")
 	}
 
-	return &application.AuthInfo{
+	return &domain.AuthInfo{
 		AuthId: strconv.Itoa(user.ID),
 		Email:  user.Email,
 	}, nil

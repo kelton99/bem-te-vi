@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"context"
 	"fmt"
 	"unicode/utf8"
 )
@@ -40,9 +39,4 @@ func (l *LoginUserQuery) Validate() error {
 		return fmt.Errorf("password too short")
 	}
 	return nil
-}
-
-type AuthService interface {
-	Login(ctx context.Context, query *LoginUserQuery) (*AuthInfo, error)
-	// Logout(ctx context.Context, authId string) error
 }

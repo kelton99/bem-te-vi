@@ -42,6 +42,17 @@ func (s *UserService) GetUser(id int) (domain.User, error) {
 	return user, nil
 }
 
+func (s *UserService) GetUserByEmail(username string) (domain.User, error) {
+
+	user, err := s.UserRepository.FindByEmail(username)
+
+	if err != nil {
+		return domain.User{}, fmt.Errorf("failed to get user: %w", err)
+	}
+
+	return user, nil
+}
+
 func (s *UserService) GetUsers() ([]domain.User, error) {
 
 	rows, err := s.UserRepository.FindAll()

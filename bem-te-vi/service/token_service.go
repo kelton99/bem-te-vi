@@ -1,7 +1,7 @@
 package service
 
 import (
-	"application"
+	"application/domain"
 	"fmt"
 	"strings"
 	"time"
@@ -17,7 +17,7 @@ func NewTokenService() *TokenService {
 	return &TokenService{}
 }
 
-func (s *TokenService) GenerateToken(authInfo *application.AuthInfo) (*application.Token, error) {
+func (s *TokenService) GenerateToken(authInfo *domain.AuthInfo) (*domain.Token, error) {
 	// Definindo as claims (dados armazenados no token)
 	claims := jwt.MapClaims{
 		"authorized": true,
@@ -35,7 +35,7 @@ func (s *TokenService) GenerateToken(authInfo *application.AuthInfo) (*applicati
 		return nil, err
 	}
 
-	return &application.Token{Token: tokenString, Expiry: time.Now().Add(time.Minute * 15)}, nil
+	return &domain.Token{Token: tokenString, Expiry: time.Now().Add(time.Minute * 15)}, nil
 }
 
 func (s *TokenService) ValidateToken(tokenString string) error {
