@@ -1,4 +1,4 @@
-package application
+package domain
 
 import (
 	"context"
@@ -19,15 +19,15 @@ type LoginUserQuery struct {
 }
 
 type AuthInfo struct {
-	AuthId      string
-	Email       string
+	AuthId string
+	Email  string
 }
 
 // Validate returns an error if LoginUserQUery has invalid fields.
 // Only performs basic validation.
 func (l *LoginUserQuery) Validate() error {
 	if l.Username == "" {
-		return fmt.Errorf("username must be provided")	
+		return fmt.Errorf("username must be provided")
 	} else if utf8.RuneCountInString(l.Username) > MaxUsernameLen {
 		return fmt.Errorf("username too long")
 	} else if utf8.RuneCountInString(l.Username) < MinUsernameLen {

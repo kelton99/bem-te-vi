@@ -3,7 +3,6 @@ package main
 import (
 	"application/auth"
 	"application/http"
-	"application/postgres"
 	"application/token"
 	"context"
 	"fmt"
