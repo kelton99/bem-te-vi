@@ -1,6 +1,7 @@
 package main
 
 import (
+	"application/config"
 	"context"
 	"fmt"
 	"os"
@@ -23,7 +24,7 @@ func main() {
 
 	fmt.Println("Iniciando o servidor...")
 
-	server := InitializeServer()
+	server := config.InitializeServer()
 
 	// Usar contexto para gerenciar o ciclo de vida do servidor
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
@@ -31,22 +32,22 @@ func main() {
 
 	go func() {
 		if err := server.Start(); err != nil {
-			server.logger.Fatalf("Erro ao iniciar o servidor: %v", err)
+			server.Logger.Fatalf("Erro ao iniciar o servidor: %v", err)
 		}
 	}()
 
 	<-ctx.Done()
-	server.logger.Println("Desligando o servidor...")
+	server.Logger.Println("Desligando o servidor...")
 
 	// Tempo de espera para o servidor desligar
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := server.Stop(shutdownCtx); err != nil {
-		server.logger.Fatalf("Erro ao desligar o servidor: %v", err)
+		server.Logger.Fatalf("Erro ao desligar o servidor: %v", err)
 	}
 
-	server.logger.Println("Servidor desligado com sucesso")
+	server.Logger.Println("Servidor desligado com sucesso")
 }
 
 // go run cmd/server/main.go
