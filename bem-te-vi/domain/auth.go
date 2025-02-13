@@ -1,7 +1,6 @@
-package application
+package domain
 
 import (
-	"context"
 	"fmt"
 	"unicode/utf8"
 )
@@ -19,15 +18,15 @@ type LoginUserQuery struct {
 }
 
 type AuthInfo struct {
-	AuthId      string
-	Email       string
+	AuthId string
+	Email  string
 }
 
 // Validate returns an error if LoginUserQUery has invalid fields.
 // Only performs basic validation.
 func (l *LoginUserQuery) Validate() error {
 	if l.Username == "" {
-		return fmt.Errorf("username must be provided")	
+		return fmt.Errorf("username must be provided")
 	} else if utf8.RuneCountInString(l.Username) > MaxUsernameLen {
 		return fmt.Errorf("username too long")
 	} else if utf8.RuneCountInString(l.Username) < MinUsernameLen {
@@ -40,9 +39,4 @@ func (l *LoginUserQuery) Validate() error {
 		return fmt.Errorf("password too short")
 	}
 	return nil
-}
-
-type AuthService interface {
-	Login(ctx context.Context, query *LoginUserQuery) (*AuthInfo, error)
-	// Logout(ctx context.Context, authId string) error
 }
